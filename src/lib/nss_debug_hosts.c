@@ -2,7 +2,7 @@
 
 enum nss_status _nss_debug_sethostent(int stayopen) {
   char* c_stayopen="";
-  sprintf(c_stayopen, "%d", stayopen);
+  asprintf(&c_stayopen, "%d", stayopen);
   result(__func__,c_stayopen);
   return NSS_STATUS_SUCCESS;
 }
