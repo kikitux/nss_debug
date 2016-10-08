@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(nss_debug)
-set(SOURCE_FILES src/lib/nss_debug.h src/lib/nss_debug_hosts.c)
+set(SOURCE_FILES src/lib/nss_debug.h src/lib/nss_debug.c src/lib/nss_debug_hosts.c)
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 2)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib/)

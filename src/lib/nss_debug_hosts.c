@@ -32,8 +32,7 @@ enum nss_status _nss_debug_gethostbyname2_r(const char *name, int af,
                                             struct hostent *host,
                                             char *buffer, size_t buflen,
                                             int *errnop, int *h_errnop) {
-  fprintf(stderr, "NSS DEBUG: Called %s with args (name: %s)\n", __FUNCTION__,
-          name);
+  result(__FUNCTION__,name);
   return NSS_STATUS_NOTFOUND;
 }
 
