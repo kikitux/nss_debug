@@ -1,25 +1,25 @@
 #include "nss_debug.h"
 
-enum nss_status _nss_debug_sethostent(int stayopen) {
+enum nss_status _nss_last_sethostent(int stayopen) {
   char* c_stayopen;
   sprintf(c_stayopen, "%d", stayopen);
   result(__FUNCTION__,c_stayopen);
   return NSS_STATUS_SUCCESS;
 }
 
-enum nss_status _nss_debug_endhostent(void) {
+enum nss_status _nss_last_endhostent(void) {
   result(__FUNCTION__,"");
   return NSS_STATUS_NOTFOUND;
 }
 
-enum nss_status _nss_debug_gethostent_r(struct hostent *host, char *buffer,
+enum nss_status _nss_last_gethostent_r(struct hostent *host, char *buffer,
                                         size_t buflen, int *errnop,
                                         int *h_errnop) {
   result(__FUNCTION__,host->h_addr_list[0]);
   return NSS_STATUS_NOTFOUND;
 }
 
-enum nss_status _nss_debug_gethostbyaddr_r(const void *addr,
+enum nss_status _nss_last_gethostbyaddr_r(const void *addr,
                                            socklen_t addrlen, int af,
                                            struct hostent *host,
                                            char *buffer, size_t buflen,
@@ -28,7 +28,7 @@ enum nss_status _nss_debug_gethostbyaddr_r(const void *addr,
   return NSS_STATUS_NOTFOUND;
 }
 
-enum nss_status _nss_debug_gethostbyname2_r(const char *name, int af,
+enum nss_status _nss_last_gethostbyname2_r(const char *name, int af,
                                             struct hostent *host,
                                             char *buffer, size_t buflen,
                                             int *errnop, int *h_errnop) {
@@ -36,7 +36,7 @@ enum nss_status _nss_debug_gethostbyname2_r(const char *name, int af,
   return NSS_STATUS_NOTFOUND;
 }
 
-enum nss_status _nss_debug_gethostbyname4_r(const char *name,
+enum nss_status _nss_last_gethostbyname4_r(const char *name,
                                             struct gaih_addrtuple **pat,
                                             char *buffer, size_t buflen,
                                             int *errnop, int *h_errnop,
@@ -45,7 +45,7 @@ enum nss_status _nss_debug_gethostbyname4_r(const char *name,
   return NSS_STATUS_NOTFOUND;
 }
 
-enum nss_status _nss_debug_gethostbyname_r(const char *name,
+enum nss_status _nss_last_gethostbyname_r(const char *name,
                                            struct hostent *host,
                                            char *buffer, size_t buflen,
                                            int *errnop, int *h_errnop) {
