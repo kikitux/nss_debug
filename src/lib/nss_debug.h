@@ -12,3 +12,5 @@
 //    fprintf(stderr, "NSS DEBUG: function: %s, name: %s, i: %d\n", function, msg, i);
 //  }
 //}
+
+void result(const char* , const char* );
