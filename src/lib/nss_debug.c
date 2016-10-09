@@ -34,12 +34,12 @@ void result(const char* function, const char* msg){
 
   char* logmsg; // for the result message
   asprintf(&logmsg,
-           "NSS %s: process: %s, function: %s, dst: %s, ppid: %d",
+           "NSS %s: command: %s, function: %s, dst: %s, ppid: %d",
            NAME, __progname, function, msg, getppid());
 
   char* metric; // for datadog
   asprintf(&metric,
-           "sample.counter:1|c|#process:%s,function:%s,nss:%s,src:%s,dst:%s,ppid:%d",
+           "sample.counter:1|c|#command:%s,function:%s,nss:%s,src:%s,dst:%s,ppid:%d",
            __progname, function, NAME, hostname, msg, getppid());
 
   if (isatty(fileno(stdin))){
