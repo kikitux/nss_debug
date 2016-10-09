@@ -11,6 +11,6 @@
 #include <sys/socket.h>
 #include <unistd.h> // for isatty
 
-void udp(const unsigned short , char**);
+void udp(const unsigned short , char*);
 void result(const char* , const char* );
 extern char *__progname;

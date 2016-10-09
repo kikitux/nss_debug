@@ -1,21 +1,19 @@
 #include "nss_debug.h"
 
-void udp(const unsigned short port, char** message)
+void udp(const unsigned short port, char* message)
 {
-  static struct sockaddr_in oAddr;
-  static socklen_t iAddrLen = sizeof(oAddr);
+  struct sockaddr_in oAddr;
+  socklen_t iAddrLen = sizeof(oAddr);
   int sock;
 
-  if(! oAddr.sin_family) {
-    memset((char *)&oAddr, 0,sizeof(oAddr));
-    oAddr.sin_family      = AF_INET;
-    oAddr.sin_port        = htons(port);
-    oAddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-  }
+  memset((char *)&oAddr, 0,sizeof(oAddr));
+  oAddr.sin_family      = AF_INET;
+  oAddr.sin_port        = htons(port);
+  oAddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
   if((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
       return;
   }
-  sendto(sock, message, strlen(*message) + 1, MSG_CONFIRM, (struct sockaddr *)&oAddr, iAddrLen);
+  sendto(sock, message, strlen(message) + 1, MSG_CONFIRM, (struct sockaddr *)&oAddr, iAddrLen);
   close(sock);
   return;
 }
@@ -47,5 +45,5 @@ void result(const char* function, const char* msg){
   }
 
   syslog (LOG_MAKEPRI(LOG_LOCAL1, LOG_INFO),"%s\n", logmsg);
-  udp(8125, &metric);
+  udp(8125, metric);
 }
