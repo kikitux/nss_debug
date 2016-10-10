@@ -29,21 +29,34 @@ void result(const char* function, const char* msg){
   #else
   char* NAME="DEBUG";
   #endif
-
-  char* logmsg; // for the result message
-  asprintf(&logmsg,
-           "NSS %s: command: %s, function: %s, dst: %s, ppid: %d",
-           NAME, __progname, function, msg, getppid());
-
+  #if defined(DDOG)
+  char* metricname=DDOG;
+  #else
+  char* metricname="sample.gauge";
+  #endif
   char* metric; // for datadog
+  char* logmsg; // for the result message
+
+  asprintf(&logmsg,
+           "NSS %s: func: %s, dst: %s, ppid: %d",
+           NAME, function, msg, getppid());
+
   asprintf(&metric,
-           "sample.counter:1|c|#command:%s,function:%s,nss:%s,src:%s,dst:%s,ppid:%d",
-           __progname, function, NAME, hostname, msg, getppid());
+           "%s:1|c|#command:%s,function:%s,nss:%s,src:%s,dst:%s,ppid:%d",
+           metricname, __progname, function, NAME, hostname, msg, getppid());
 
+  #if defined(CONSOLE)
   if (isatty(fileno(stdin))){
-    fprintf(stderr, "%s\n%s\n", logmsg, metric);
+    fprintf(stderr, "%s\n", metric);
+    fprintf(stderr, "%s\n", logmsg);
   }
+  #endif
 
-  syslog (LOG_MAKEPRI(LOG_LOCAL1, LOG_INFO),"%s\n", logmsg);
+  #if defined(DDOG)
   udp(8125, metric);
+  #endif
+
+  #if defined(SYSLOG)
+  syslog (LOG_MAKEPRI(LOG_LOCAL1, LOG_INFO),"%s\n", logmsg);
+  #endif
 }
