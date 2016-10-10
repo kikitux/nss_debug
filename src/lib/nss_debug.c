@@ -47,9 +47,9 @@ void result(const char* function, const char* msg){
 
   #if defined(CONSOLE)
   if (isatty(fileno(stdin))){
-    fprintf(stderr, "%s\n", metric);
-    #if defined(DDOG)
     fprintf(stderr, "%s\n", logmsg);
+    #if defined(DDOG) // if console + if ddog
+    fprintf(stderr, "%s\n", metric);
     #endif
   }
   #endif
