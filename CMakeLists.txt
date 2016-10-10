@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 set(SOURCE_FILES src/lib/nss_debug.h src/lib/nss_debug.c)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pedantic -Wextra")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
