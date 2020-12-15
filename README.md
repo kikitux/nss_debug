@@ -2,6 +2,15 @@
 
 ## How to use/build
 
+### pre-requirements
+
+for ubuntu:
+
+```
+apt-get update
+apt-get install -y build-essentials cmake vim
+```
+
 ### build
 ```
 git clone https://github.com/kikitux/nss_debug
